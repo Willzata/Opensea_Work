@@ -58,3 +58,31 @@ user_image_results = image_embeddings.knn.search(index, id_to_name, user_image_e
 
 #Display the k nearest neighbours from main index
 image_embeddings.knn.display_results(path_images, user_image_results)
+
+#Returns a list of tuples, each containing the 'distance' or score between 
+#the uploaded image and the k nearest neighbours, and the filepath.
+
+scores = []
+names = []
+for i in user_image_results:
+    scores.append(i[0])
+    names.append(i[1])
+    
+scores,names
+
+#Returns information about each k nearest neighbour
+def ReturnInfo(names,i):
+    conn = sqlite3.connect('/mnt/c/Users/wmang/Python Stuff/Opensea/Database/PC_Assets.db')
+    cursor = conn.cursor()
+    n = names[i]
+    cursor.execute("SELECT * from Assets_full WHERE filepath=?", (n,))
+    vals = cursor.fetchall()
+    vals = vals[0]
+    return vals
+
+for i,m in enumerate(names):
+    vals = ReturnInfo(names,i)
+    print(vals)
+    print("")
+    
+
