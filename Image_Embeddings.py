@@ -82,7 +82,7 @@ def ReturnInfo(names,i):
 
 for i,m in enumerate(names):
     vals = ReturnInfo(names,i)
-    print(vals)
+    print(vals[3])
     print("")
     
 
